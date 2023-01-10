@@ -7,8 +7,12 @@ const questions = [
   { message: "Please type the DESCRIPTION section:", type: "input", name: "description" },
   { message: "Please type the INSTALLATION section:", type: "input", name: "installation" },
   { message: "Please type THE USAGE section:", type: "input", name: "usage" },
-  { message: "Please type the CREDITS section:", type: "input", name: "credits" },
-  { message: "Please type the LICENSE section:", type: "input", name: "license" },
+  {
+    message: "Please type the LICENSE section:",
+    type: "list",
+    name: "license",
+    choices: ["MIT", "GNU", "Apache"],
+  },
   { message: "Please type the CONTRIBUTE section:", type: "input", name: "contribute" },
   { message: "Please type the TESTS section:", type: "input", name: "tests" },
   { message: "Please type the QUESTIONS section:", type: "input", name: "questions" },
@@ -21,7 +25,6 @@ function writeToFile(data) {
     description,
     installation,
     usage,
-    credits,
     license,
     contribute,
     tests,
@@ -29,6 +32,14 @@ function writeToFile(data) {
   }) => {
     return `# ${title}
 
+## Table of Contents
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Contribute](#contribute)
+* [Tests](#tests)
+* [Questions](#questions)
 ## Description
 
 ${description}
@@ -41,13 +52,9 @@ ${installation}
 
 ${usage}
 
-## Credits
-
-${credits}
-  
 ## License
     
-${license}
+This project is licensed under the ${license} license.
     
 ## How to Contribute
     
@@ -61,7 +68,7 @@ ${tests}
     
 ${questions}`;
   };
-  fs.writeFile("readme.md", content(data), (error) => {
+  fs.writeFile("./samples/generated_readme.md", content(data), (error) => {
     error ? console.error(error) : console.log("File Written successfully!");
   });
 }
