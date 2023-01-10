@@ -14,8 +14,9 @@ const questions = [
     choices: ["MIT", "GNU", "Apache"],
   },
   { message: "Please type the CONTRIBUTE section:", type: "input", name: "contribute" },
-  { message: "Please type the TESTS section:", type: "input", name: "tests" },
-  { message: "Please type the QUESTIONS section:", type: "input", name: "questions" },
+  { message: "Please type the command to test the application:", type: "input", name: "tests" },
+  { message: "Please type your github username:", type: "input", name: "username" },
+  { message: "Please type your email:", type: "input", name: "email" },
 ];
 
 // TODO: Create a function to write README file
@@ -28,7 +29,8 @@ function writeToFile(data) {
     license,
     contribute,
     tests,
-    questions,
+    username,
+    email,
   }) => {
     return `# ${title}
 
@@ -68,8 +70,11 @@ ${tests}
 \`\`\`
     
 ## Questions
-    
-${questions}`;
+
+See more of my projects on my Github page https://github.com/${username}.
+Shall you have any question, issue, suggestion, and/or compliment, please send an email ${email}.
+
+`;
   };
   fs.writeFile("./samples/generated_readme.md", content(data), (error) => {
     error ? console.error(error) : console.log("File Written successfully!");
