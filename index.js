@@ -61,8 +61,11 @@ This project is licensed under the ${license} license.
 ${contribute}
     
 ## Tests
-    
+
+Run the following command to test the application.
+ \`\`\`
 ${tests}
+\`\`\`
     
 ## Questions
     
