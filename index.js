@@ -9,27 +9,69 @@ const questions = [
   { message: "Please type THE USAGE section:", type: "input", name: "usage" },
   { message: "Please type the CREDITS section:", type: "input", name: "credits" },
   { message: "Please type the LICENSE section:", type: "input", name: "license" },
-  { message: "Please type the CONTRIBUTING section:", type: "input", name: "contributing" },
+  { message: "Please type the CONTRIBUTE section:", type: "input", name: "contribute" },
   { message: "Please type the TESTS section:", type: "input", name: "tests" },
   { message: "Please type the QUESTIONS section:", type: "input", name: "questions" },
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-  const content = "";
-  fs.writeFile("readme.md", content, (error) => {
+function writeToFile(data) {
+  const content = ({
+    title,
+    description,
+    installation,
+    usage,
+    credits,
+    license,
+    contribute,
+    tests,
+    questions,
+  }) => {
+    return `# ${title}
+
+## Description
+
+${description}
+
+## Installation
+
+${installation}
+
+## Usage
+
+${usage}
+
+## Credits
+
+${credits}
+  
+## License
+    
+${license}
+    
+## How to Contribute
+    
+${contribute}
+    
+## Tests
+    
+${tests}
+    
+## Questions
+    
+${questions}`;
+  };
+  fs.writeFile("readme.md", content(data), (error) => {
     error ? console.error(error) : console.log("File Written successfully!");
   });
 }
 
 // TODO: Create a function to initialize app
 function init() {
-  questions.forEach((question) =>
-    inquirer
-      .prompt([{ type: question.type, message: question.message, name: question.name }])
-      .then((response) => console.log(response))
-      .catch(console.log)
-  );
+  inquirer
+    .prompt(questions)
+    .then((response) => writeToFile(response))
+    .catch(console.log);
 }
 
 // Function call to initialize app
