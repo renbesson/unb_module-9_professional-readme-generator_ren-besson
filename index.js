@@ -11,7 +11,7 @@ const questions = [
     message: "Please type the LICENSE section:",
     type: "list",
     name: "license",
-    choices: ["MIT", "GNU", "Apache"],
+    choices: ["Apachev2", "GNUv3", "MIT", "Mozilla"],
   },
   { message: "Please type the CONTRIBUTE section:", type: "input", name: "contribute" },
   { message: "Please type the command to test the application:", type: "input", name: "tests" },
@@ -20,6 +20,21 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
+function licenseBadge(license) {
+  switch (license) {
+    case "Apachev2":
+      return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+    case "GNUv3":
+      return "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+    case "MIT":
+      return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+    case "Mozilla":
+      return "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)";
+    default:
+      return "No License";
+  }
+}
+
 function writeToFile(data) {
   const content = ({
     title,
@@ -33,6 +48,8 @@ function writeToFile(data) {
     email,
   }) => {
     return `# ${title}
+
+${licenseBadge(license)}
 
 ## Table of Contents
 * [Description](#description)
