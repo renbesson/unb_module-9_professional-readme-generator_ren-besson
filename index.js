@@ -90,7 +90,7 @@ ${tests}
 
 See more of my projects on my Github page https://github.com/${username}.
 
-Shall you have any question, issue, suggestion, and/or compliment, please send an email ${email}.
+Shall you have any question, issue, suggestion, and/or compliment, please send me an email ${email}.
 
 `;
   };
